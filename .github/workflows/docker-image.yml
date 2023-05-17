@@ -32,4 +32,5 @@ jobs:
     - name: Push the Docker image
       run: |
         docker push ncondes/graphql-actions:0.0.2
+        docker push ncondes/graphql-actions:latest
         
