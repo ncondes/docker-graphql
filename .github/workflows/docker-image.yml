@@ -33,17 +33,17 @@ jobs:
         NEW_VERSION: ${{ steps.version.outputs.version }}
       run: |
         docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
-        echo "version: $NEW_VERSION"
         
-
-
+    - name: Build the Docker image
+      env:
+        NEW_VERSION: ${{ steps.version.outputs.version }}
+      run: |
+        docker build -t ncondes/graphql-actions:NEW_VERSION .
         
-#     - name: Build the Docker image
-#       run: |
-#         docker build -t ncondes/graphql-actions:0.0.2 .
-        
-#     - name: Push the Docker image
-#       run: |
-#         docker push ncondes/graphql-actions:0.0.2
-#         docker push ncondes/graphql-actions
+    - name: Push the Docker image
+      env:
+        NEW_VERSION: ${{ steps.version.outputs.version }}
+      run: |
+        docker push ncondes/graphql-actions:$NEW_VERSION
+        docker push ncondes/graphql-actions:latest
         
